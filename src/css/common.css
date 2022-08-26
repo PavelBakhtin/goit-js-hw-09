@@ -16,13 +16,24 @@ img {
   display: block;
   max-width: 100%;
 }
+.timer {
+  display: flex;
+  margin-top: 10px;
+}
 .field {
-  display: inline-block;
+  display:flex;
+  flex-direction: column;
+  text-align: center;
   padding: 5px;
+  margin-right: 20px;
 }
 .value {
   font-size: x-large;
+  font-family: Roboto;
+  font-weight: 500;
 }
 .label {
   font-size: medium;
+  font-weight: 400;
+  font-family: Roboto;
 }

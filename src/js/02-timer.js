@@ -6,7 +6,9 @@ const counterDays = document.querySelector('[data-days]')
 const counterHours = document.querySelector('[data-hours]')
 const counterMinutes = document.querySelector('[data-minutes]')
 const counterSeconds = document.querySelector('[data-seconds]')
-
+function padStart(number) {
+  return number.toString().padStart(2,'0')
+}
 function convertMs(ms) {
     // Number of milliseconds per unit of time
     const second = 1000;
@@ -25,12 +27,9 @@ function convertMs(ms) {
   
     return { days, hours, minutes, seconds };
   }
-  
-  console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-  console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-  console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+
   startBtn.disabled = true
-  let chosenTime 
+  
 const input = document.querySelector('#datetime-picker')
 const options = {
      enableTime: true,
@@ -45,33 +44,26 @@ const options = {
       }
       startBtn.disabled = false
      
-      
-      
-    },
-    onStart(selectedDates) {
-       return setInterval(() => {
-        chosenTime = selectedDates[0] 
-        let currentTime = Date.now()
-        let diff = convertMs(chosenTime - currentTime)
-        const{days, hours, minutes, seconds} = diff
-        counterDays.textContent = days
-        counterHours.textContent = hours
-        counterMinutes.textContent = minutes
-        counterSeconds.textContent = seconds
-
-       
-      }, 1000)
-      
-      
-    
-     
-    }
-  };
+      startBtn.addEventListener('click', ()=> {
+        setInterval(() => {
+          startBtn.disabled = true
+          let chosenTime = selectedDates[0] 
+          let currentTime = Date.now()
+          let timeDiff = convertMs(chosenTime - currentTime)
+          const{days, hours, minutes, seconds} = timeDiff
+          counterDays.textContent = padStart(days)
+          counterHours.textContent =  padStart(hours)
+          counterMinutes.textContent =  padStart(minutes)
+          counterSeconds.textContent =  padStart(seconds)
   
+        }, 1000)
+       } )
+      
+    }
+   
+}
 const dateInput = flatpickr(input, options
 )
-console.log()
-startBtn.addEventListener('click', ()=> {
-  options.onStart()
- } )
+
+
 
